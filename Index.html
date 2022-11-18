@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>购物车</title>
+		<style type="text/css">
+		* {
+		    padding: 0px;
+		    margin: 0px;
+			/* 去除编号 */
+		    list-style: none;
+		}
+		img{
+			width: 250px;
+			height: 250px;
+		}
+		
+		td{
+			font-size: 20px;
+			font-weight: 40px;
+			width: 200px;
+			text-align: center;
+		}
+		.nav {
+		    height: 50px;
+		    background: black;
+		}
+		
+		.nav>li {
+		    color: white;
+		    float: left;
+			/* 文字垂直剧中  只要行高和高度一致 */
+		    line-height: 50px;
+		    padding: 0px 30px;
+		    position: relative;
+		}
+		
+		
+		li {
+		    position: relative;
+		    text-align: center;
+		}
+		
+		.nav>li:hover {
+		    background: blue;
+		}
+		
+		.nav ul {
+		    background: green;
+		    width: 100px;
+		    position: absolute;
+		    left: 0px;
+		    opacity: 0;
+		    transform: rotate(0deg) scale(.5);
+		    transition: .2s;
+		}
+		
+		li li:hover {
+		    background: yellow;
+		}
+		
+		.nav>li:hover ul {
+		    opacity: 1;
+		    transform: rotate(360deg) scale(1);
+		}
+		
+		li::after {
+		    content: "";
+		    position: absolute;
+		    width: 0;
+		    height: 5px;
+		    background: pink;
+		    bottom: 10px;
+		    left: 50%;
+		    transform: translate(-50%, 0);
+		    transition: 1s;
+		}
+		
+		li:hover::after {
+		    width: 80%;
+			body {
+				font-size: 12px;
+				line-height: 25px;
+			}
+ 
+			table {
+				border-top: solid 1px #666666;
+				border-left: solid 1px #666666;
+			}
+ 
+			td {
+				text-align: center;
+				border-right: solid 1px #666666;
+				border-bottom: solid 1px #666666;
+			}
+ 
+			.left {
+				text-align: left;
+				padding-left: 10px;
+			}
+ 
+			#photo {
+				border: solid 1px #0066CC;
+				width: 200px;
+				text-align: center;
+				z-index: 2;
+				position: absolute;
+				display: none;
+				top: 50px;
+				left: 50px;
+				background-color: #ffffff;
+			}
+ 
+			#big {
+ 
+				width: 200px;
+			}
+ 
+			h1 {
+				/* transform: translate(45%); */
+				text-align: center;
+			}
+ 
+			table {
+				margin: 0 auto;
+				width: 100%;
+				border: 2px solid #aaa;
+				border-collapse: collapse;
+			}
+ 
+			table th,
+			table td {
+				border: 2px solid #aaa;
+				padding: 5px;
+			}
+ 
+			th {
+				background-color: #eee;
+			}
+			.id{
+				font-size: 10px;
+			}
+		</style>
+	</head>
+	<body>
+ 
+         <ul class="nav">
+             <li>个人中心 </li>
+             <li>首页</li>
+         </ul> 
+      
+		<table style="width: 100%;" cellspacing="0" cellpadding="0" >
+			<tr>
+				<td>商品图片</td>
+				<td>商品名称</td>
+				<td >商品价格</td>
+				<td>操作</td>
+		 </tr>
+		 <tr>
+		 	<td>
+		 		<img src="img/1.png"/>
+		 	</td>
+		 	<td class="left">飞鸟集</td>
+		 	<td class="sum">26.00元</td>
+		 	<td align="center">
+		 		<input type="button" value="加入购物车" onclick="add_shoppingcart(this)" />
+		 	</td>
+		 </tr>
+			<tr>
+		 	<td >
+				<img src="img/2.png"/>
+				</td>
+				<td class="left">月亮与六便士</td>
+				<td class="sum">26.80元</td>
+				<td>
+					<input type="button" value="加入购物车" onclick="add_shoppingcart(this)" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="img/3.png"/>
+				</td>
+				<td class="left">小王子</td>
+				<td class="sum">32.80元</td>
+				<td align="center">
+					<input type="button" value="加入购物车" onclick="add_shoppingcart(this)" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="img/4.png"/>
+				</td>
+				<td class="left">新月集</td>
+				<td class="sum">44.00元</td>
+				<td align="center">
+					<input type="button" value="加入购物车" onclick="add_shoppingcart(this)" />
+				</td>
+			</tr>
+		 <tr>
+		 	<td>
+		 		<img src="img/5.png"/>
+		 	</td>
+		 	<td class="left">茶馆/我这一辈子</td>
+		 	<td class="sum">67.40元</td>
+		 	<td align="center">
+		 		<input type="button" value="加入购物车" onclick="add_shoppingcart(this)" />
+		 	</td>
+		 </tr>
+			<tr>
+				<td>
+					<img src="img/6.png"/>
+				</td>
+				<td class="left">呼啸山庄</td>
+				<td class="sum">38.00元</td>
+				<td align="center">
+					<input type="button" value="加入购物车" onclick="add_shoppingcart(this)" />
+				</td>
+			</tr>
+		</table>
+		<div id="photo" onmouseout="hidden()" onmousemove="shows()"></div>
+ 
+		<h1>购物车</h1>
+		<table  id="a">
+			<thead>
+				<tr>
+					<th>商品</th>
+					<th>单价（元）</th>
+					<th>数量</th>
+					<th>金额（元）</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody id="goods">
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3" align="right">总计</td>
+					<td id="total"></td>
+					<td><button onclick="tk(this)">购买</button></td>
+				</tr>
+			</tfoot>
+			
+		</table>
+		
+ 
+		<script>
+			//第一个表格
+			function show(image, event) {
+				var x;
+				var y;
+				document.getElementById("photo").style.display = "block";
+				x = parseInt(event.clientX) + parseInt(document.documentElement.scrollLeft);
+				y = parseInt(event.clientY) + parseInt(document.documentElement.scrollTop);
+				document.getElementById("photo").style.top = y + "px";
+				document.getElementById("photo").style.left = x + "px";
+				document.getElementById("big").src = "images/" + image;
+ 
+			}
+ 
+			function shows() {
+				document.getElementById("photo").style.display = "block";
+			}
+ 
+			function hidden() {
+				document.getElementById("photo").style.display = "none";
+			}
+			window.onscroll = "show()";
+ 
+			//------------------------------------------------------------------------------------------------				
+			var map = new Map(); //创建一个集合
+ 
+			function add_shoppingcart(btn) { //btn就是上面传下来的this
+				//console.log(btn);
+				var ntr = document.createElement("tr");
+				//获取到商品的价格和名称
+				var tr = btn.parentNode.parentNode; //获取到按钮的父亲 
+				var tds = tr.children;
+				//获取商品的名称
+				var name = tds[0].innerHTML;
+				//获取商品的价格
+				var price = tds[2].innerHTML;
+				console.log("name:" + name + ",price:" + price);
+ 
+				//判断集合中是否又加入商品.如果有不能加入,只能加数量,没有可加入
+				if (map.has(name)) {
+					//如果有不能加入,只能加数量
+					var tr1 = map.get(name);
+					//console.log(tr1);
+					//var btn1=tr1.getElementById("btn1");       
+					var btn1 = tr1.getElementsByTagName("button")[1];
+					//console.log(btn1);
+					jia(btn1);
+				} else {
+					//如果没有该商品,可以正常添加
+					ntr.innerHTML =
+						`
+						<td style="text-align:center;">${name}</td>
+						 <td style="text-align:center;">${price}</td>
+						<td style="text-align:center;">
+						<button onclick="jian(this)">-</button>
+						<input type="text" value="1" size="1" />
+						<button id="btn1" onclick="jia(this)">+</button>
+						</td>
+						<td>${price}</td>
+						<td style="text-align:center;"><button onclick="del(this)">X</buttton></td>`;
+ 
+					//将name和一行数据存入到集合中
+					map.set(name, ntr);
+					//找到tbody的对象
+					var tbody = document.getElementById("goods");
+					//把上面创建好的一行五列加入到tbody中
+					tbody.appendChild(ntr);
+					sum();
+				}
+			}
+ 
+			function del(btn) {
+				var tr = btn.parentNode.parentNode;
+				tr.remove(); //删除的是DOM文档中的内容,并没有把集合中的内容删除.
+				var tr = btn.parentNode.parentNode; //获取到按钮的父亲
+				var tds = tr.children;
+				//获取商品的名称
+				var name = tds[1].innerHTML;
+				map.delete(name); //删除的是集合中的内容
+				sum();
+			}
+ 
+			function jian(btn) {
+				var inpt = btn.nextElementSibling;
+				var amount = inpt.value;
+				if (amount <= 1) {
+					return;
+				} else {
+					inpt.value = --amount;
+					var trs = btn.parentNode.parentNode;
+					console.log(trs);
+					var price = parseInt(trs.children[1].innerHTML);
+					trs.children[3].innerHTML = price * amount;
+					sum();
+				}
+			}
+ 
+			function jia(btn) { //形式参数
+				//获取+号按钮左边input控件的对象
+				var inpt = btn.previousElementSibling;
+				//console.log(Inpt);
+				var amount = inpt.value;
+				//console.log(amount);
+				inpt.value = ++amount; //把累加后的数放进去
+				var td = btn.parentNode.previousElementSibling;
+				//console.log(td);
+				var price = parseInt(td.innerHTML); //取到单价的值
+				//console.log(price);
+				var rtd = btn.parentNode.nextElementSibling;
+				rtd.innerHTML = price * amount;
+				sum();
+			}
+ 
+			//求所有商品的累加和
+			function sum() {
+				//获取到tbody的对象
+				var tbody = document.getElementById("goods");
+				var trs = tbody.children; //得到tbody的孩子
+				var total = 0; //用于求累加和
+				for (i = 0; i < trs.length; i++) { //取到每一个商品的价格
+					var price = trs[i].children[3].innerHTML;
+					total = total + parseInt(price);
+				}
+				var t = document.getElementById("total");
+				//然后把total的值放入到t对象中
+				t.innerHTML = total;
+			}
+			
+			function tk(btn){
+         
+		 
+			}
+			</script>
+	</body>
+</html>
